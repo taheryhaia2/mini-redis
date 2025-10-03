@@ -19,3 +19,17 @@ class TestRedisStorage:
         self.redis.set("age",21)
         assert self.redis.exists("age")==True
         self.redis.redis.exists("nonexistent")==False
+    def test_expiration(self):
+        self.redis.set("key","value",expire_seconds:1)
+        assert self.redis.get("key")=="value"
+        time.sleep(1.1)
+        assert self.redis.get("key") is none
+    
+    def test_ttl(self):
+        self.redis.set("key","value",expire_seconds=2)
+        time.sleep(1.2)
+        assert self.redis.ttl("key")==0.8
+        assert self.redis.ttl("hh")==-2
+        self.redis.set("nom","haer")
+        assert self.redis.ttl("nom")==-1
+    

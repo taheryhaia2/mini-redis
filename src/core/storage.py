@@ -59,7 +59,7 @@ class RedisStorage:
          return 0
    def ttl(self,key:str)->int:
       with self._lock:
-         if key not in self._estoxpir:
+         if key not in self._store:
             return -2
          if key not in self._expires:
             return -1
